@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Author: Pruthviraj
+# Vagrant file for setup enevironment for ansible work play !!!!
+# ----------------------------------------------------------------------
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.ssh.insert_key = true
+    config.vm.provider :virtualbox do |vb|
+        vb.memory = 256
+        vb.cpus = 2
+        vb.linked_clone = true
+        vb.gui = false
+    end
+    # Application Ubuntu Database Server configuration
+    config.vm.define "ubuntu-db" do|app|
+        app.vm.hostname = "ubuntu-db"
+        app.vm.box = "bento/ubuntu-20.04"
+        app.vm.network :private_network, ip: "192.168.60.11"
+    end
+    # Application Cent OS DB configuration
+    config.vm.define "cent-db" do|app|
+        app.vm.hostname = "cent-db"
+        app.vm.box = "centos/7"
+        app.vm.network :private_network, ip: "192.168.60.12"
+    end
+    # Application Server configuration
+    config.vm.define "app-server" do|app|
+        app.vm.hostname = "app-server"
+        app.vm.box = "bento/ubuntu-20.04"
+        app.vm.network :private_network, ip: "192.168.60.13"
+    end
+    # Application Load balancer configuration
+    config.vm.define "load-balancer" do|app|
+        app.vm.hostname = "load-balancer"
+        app.vm.box = "centos/7"
+        app.vm.network :private_network, ip: "192.168.60.14"
+    end
