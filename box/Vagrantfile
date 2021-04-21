@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Application Ubuntu Database Server configuration
     config.vm.define "ubuntu-db" do|app|
         app.vm.hostname = "ubuntu-db"
-        app.vm.box = "bento/ubuntu-20.04"
+        app.vm.box = "ubuntu/trusty64"
         app.vm.network :private_network, ip: "192.168.60.11"
     end
     # Application Cent OS DB configuration
@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Application Server configuration
     config.vm.define "app-server" do|app|
         app.vm.hostname = "app-server"
-        app.vm.box = "bento/ubuntu-20.04"
+        app.vm.box = "ubuntu/trusty64"
         app.vm.network :private_network, ip: "192.168.60.13"
     end
     # Application Load balancer configuration
@@ -37,3 +37,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         app.vm.box = "centos/7"
         app.vm.network :private_network, ip: "192.168.60.14"
     end
+end
